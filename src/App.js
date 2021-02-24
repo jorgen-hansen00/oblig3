@@ -60,3 +60,13 @@ class InputField extends React.Component {
     );
   }
 }
+
+const Wrapper = ({ children, condition, wrapper }) =>
+  condition ? wrapper(children) : children
+
+<Wrapper
+  condition={shouldWrap}
+  wrapper={children => <ProtectedLayout>{children}</ProtectedLayout>}
+>
+  <p>This is a short message.</p>
+</Wrapper>
