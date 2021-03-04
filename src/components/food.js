@@ -1,9 +1,9 @@
 const Food = ({ food }) => (
-    <ul>
-      {food.map((f) => (
-        <li key={f}>{f}</li>
-      ))}
-    </ul>
-  );
-  
-  export default Food;
+  <ul>
+    {food.map((foods) => (
+      <li key={foods}>{foods}</li>
+    ))}
+  </ul>
+);
+
+export default Food;
