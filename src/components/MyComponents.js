@@ -1,4 +1,5 @@
-import ReactDOM from "react";
+import Title from "./title";
 
-const element = <h1>Hello, world</h1>;
-ReactDOM.render(element, document.getElementById('root'));
+const MyComponent = ({ title }) => <title title={title} />;
+
+export default MyComponent;

@@ -1,72 +1,31 @@
-import React, { useState } from 'react';
-import './styles.scss';
-import ReactDOM from 'react-dom';
+import { useState } from "react";
+import Alert from "./components/alert";
+import Food from "./components/food";
+import MyComponent from "./components/mycomponent";
+import Title from "./components/title";
+import Wrapper from "./components/wrapper";
+import "./styles.scss";
+
+const food = ["Pizza", "Hamburger", "Coke"];
 
 export default function App() {
+  const [inputChild, setInputChild] = useState("");
+  const [btnClicked, setBtnClicked] = useState(false);
   return (
     <div className="App">
-    <MyComponent title="It Works" />
-    <InputField />
+      <MyComponent Title="It works" />
+      <Food food={food} />
+      <Alert
+        inputChild={inputChild}
+        setInputChild={setInputChild}
+        btnClicked={btnClicked}
+        setBtnClicked={setBtnClicked}
+      />
+      {btnClicked && <p>{inputChild}</p>}
+      <Wrapper>
+        <Title title="Inside wrapper" />
+        <p>Inside wrapper</p>
+      </Wrapper>
     </div>
-  )
-}
-
-function MyComponent(props) {
-  return <title><h1>My First Component</h1>{props.title}</title>;
-};
-
-function FoodList(props) {
-  const foods = props.foods;
-  const listFoods = foods.map((food) =>
-    <li key={food.toString()}>{food}</li>
-  );
-  return (
-      <ul>{listFoods}</ul>
   );
 }
-
-const foods = ['Pizza', 'Hamburger', 'Coke'];
-ReactDOM.render(
-  <FoodList foods={foods} />,
-  document.getElementById('root')
-);
-
-class InputField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('Value of input field: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Button" />
-      </form>
-    );
-  }
-}
-
-const Wrapper = ({ children, condition, wrapper }) =>
-  condition ? wrapper(children) : children
-
-<Wrapper
-  condition={shouldWrap}
-  wrapper={children => <ProtectedLayout>{children}</ProtectedLayout>}
->
-  <p>This is a short message.</p>
-</Wrapper>
